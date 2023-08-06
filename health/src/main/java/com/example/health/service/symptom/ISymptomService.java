@@ -1,5 +1,6 @@
 package com.example.health.service.symptom;
 
+import com.example.health.exception.OneSymptomException;
 import com.example.health.model.Disease;
 import com.example.health.model.Symptom;
 import com.example.health.repository.SymptomRepository;
@@ -25,7 +26,8 @@ public class ISymptomService implements SymptomService{
     }
 
     @Override
-    public List<Symptom> getAll(List<String> s) {
+    public List<Symptom> getAll(List<String> s) throws OneSymptomException {
+        if(s.size()==1) throw new OneSymptomException("Co mot dau vao tim an buoi a");
         return s.stream().map(s1 -> symptomRepository.findSymptomBySymptomdescribe(s1)).toList();
     }
 

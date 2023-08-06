@@ -1,10 +1,12 @@
 package com.example.health;
 
+import com.example.health.exception.OneSymptomException;
 import com.example.health.model.Disease;
 import com.example.health.model.Symptom;
 import com.example.health.repository.DiseaseRepository;
 import com.example.health.repository.SymptomRepository;
 import com.example.health.service.disease.DiseaseService;
+import com.example.health.service.symptom.SymptomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,11 +31,18 @@ public class HealthApplication {
 	@Autowired
 	DiseaseService diseaseService;
 
-	@Bean
-	public CommandLineRunner commandLineRunner(){
-		return args -> {
-			diseaseService.findAllDiseasePossible(List.of("sốt"));
-		};
-	}
+	@Autowired
+	SymptomService symptomService;
+
+//	@Bean
+//	public CommandLineRunner commandLineRunner(){
+//		return args -> {
+//			try {
+//				symptomService.getAll(List.of("sốt"));
+//			}catch (OneSymptomException oneSymptomException){
+//				System.out.println("Bo di buoi chay nua");
+//			}
+//		};
+//	}
 
 }

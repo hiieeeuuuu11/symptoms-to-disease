@@ -2,6 +2,7 @@ package com.example.health.service.disease;
 
 import com.example.health.dto.DiseaseData;
 import com.example.health.dto.DiseaseResponse;
+import com.example.health.exception.OneSymptomException;
 import com.example.health.model.Disease;
 import com.example.health.model.Symptom;
 import com.example.health.repository.DiseaseRepository;
@@ -62,7 +63,7 @@ public class IDiseaseService implements DiseaseService{
     }
 
     @Override
-    public List<List<Disease>> findAllDiseasePossible(List<String> s) {
+    public List<List<Disease>> findAllDiseasePossible(List<String> s) throws OneSymptomException {
         List<Symptom> symptoms = symptomService.getAll(s);
         Map<String,Integer> statistics = new HashMap<>();
 
@@ -108,7 +109,7 @@ public class IDiseaseService implements DiseaseService{
     }
 
     @Override
-    public DiseaseResponse findAllDiseaseResponse(List<String> symptoms) {
+    public DiseaseResponse findAllDiseaseResponse(List<String> symptoms) throws OneSymptomException{
         List<List<Disease>> ld = findAllDiseasePossible(symptoms);
 
         return DiseaseResponse.builder()
